@@ -1,0 +1,277 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+//  Algoritmos de Pesquisa (vistos na aula de 13/05) não é necessario fazer essa opção no Menu
+namespace desafioOpcionalProva
+{
+    class Program
+    {
+        static void Main(string[] args)
+
+        {
+            char escolha;
+            MostrarMenuPrincipal();
+            do
+            {
+                escolha = Console.ReadKey().KeyChar;
+
+                switch (escolha)
+                {
+                    case '1':
+                        CriarLista();
+                        break;
+                    case '2':
+                        CriarFila();
+                        break;
+                    case '3':
+                        CriarPilha();
+                        break;
+                    case '4':
+                        CriarVetor();
+                        break;
+                    case '5':
+                        CriarMatriz();
+                        break;
+                    case '0':
+                        Console.WriteLine("Saindo do programa...");
+                        break;
+                    default:
+                        Console.WriteLine("Opção inválida!");
+                        MostrarMenuPrincipal();
+                        break;
+                }
+            } while (escolha != '0');
+        }
+
+        static void MostrarMenuPrincipal()
+        {
+            Console.WriteLine("\n Menu Principal");
+            Console.WriteLine("Escolha uma opção: ");
+            Console.WriteLine("1 - Criar Lista");
+            Console.WriteLine("2 - Criar Fila");
+            Console.WriteLine("3 - Criar Pilha");
+            Console.WriteLine("4 - Criar Vetor");
+            Console.WriteLine("5 - Criar Matriz");
+            Console.WriteLine("0 - Sair");
+        }
+
+        static void CriarLista()
+        {
+            List<char> lista = new List<char>();
+            Console.WriteLine("\nCriar sua Lista");
+            while (true)
+            {
+                Console.WriteLine("Escolha uma opção: ");
+                Console.WriteLine("1 - Adicionar item");
+                Console.WriteLine("2 - Exibir lista");
+                Console.WriteLine("3 - Remover elemento da lista");
+                Console.WriteLine("4 - Consultar/Buscar Elemento");
+                Console.WriteLine("0 - Voltar para o Menu Principal");
+
+                char escolha = Console.ReadKey().KeyChar;
+
+                switch (escolha)
+                {
+                    case '1':
+                        Console.Write("Digite um item a ser adicionado: ");
+                        char adicionarItem = Console.ReadKey().KeyChar;
+
+                        lista.Add(adicionarItem);
+
+                        Console.WriteLine($"'{adicionarItem}' adicionado à lista.");
+                        break;
+
+                    case '2':
+                        if (lista.Count > 0)
+                        {
+                            Console.WriteLine("\nelementos da Lista");
+                            foreach (var item in lista)
+                            {
+                                Console.WriteLine(item);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("sua lista está vazia.");
+                        }
+                        break;
+
+                    case '3':   
+                        if (lista.Count>0)
+                        {
+                            Console.WriteLine("Qual elemento da Lista você gostaria de Remover? ");
+                            foreach (var item in lista)
+                            {
+                                Console.WriteLine(item);
+                            }
+                            char ItemRemover = Console.ReadKey().KeyChar;
+                            Console.WriteLine($"item removido: {ItemRemover}");
+                            lista.Remove(ItemRemover);
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nsua lista está vazia.");
+                        }
+                        break;
+
+                    case '4':
+
+                        break;
+
+                    case '0':
+                        MostrarMenuPrincipal();
+                        return;
+
+                    default:
+                        Console.WriteLine("Opção inválida. Tente novamente.");
+                        break;
+                }
+            }
+        }
+        static void CriarFila()
+        {
+            Queue<char> fila = new Queue<char>();
+            Console.WriteLine("\nCriar sua Fila");
+
+            while (true)
+            {
+                Console.WriteLine("Escolha uma opção: ");
+                Console.WriteLine("1 - adicionar item");
+                Console.WriteLine("2 - remover item");
+                Console.WriteLine("3 - Exibir fila");
+                Console.WriteLine("4 - Consultar/Buscar Elemento");
+                Console.WriteLine("0 - Voltar para o Menu Principal\n");
+                
+                char escolha = Console.ReadKey().KeyChar;
+
+                switch (escolha)
+                {
+                    case '1':
+                        Console.Write("\nDigite o item a ser enfileirado: ");
+                        char enfileirarItem = Console.ReadKey().KeyChar;
+
+                        fila.Enqueue(enfileirarItem);
+                        Console.WriteLine($"\n{enfileirarItem} enfileirado.");
+
+                        break;
+                    case '2':
+                        if (fila.Count > 0)
+                        {
+                            char desenfileirarItem = fila.Dequeue();
+                            Console.WriteLine($"\n{desenfileirarItem} desenfileirado.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nA fila está vazia.");
+                        }
+                        break;
+                    case '3':
+                        if (fila.Count > 0)
+                        {
+                            Console.WriteLine("elementos da Fila: ");
+                            foreach (var item in fila)
+                            {
+                                Console.WriteLine(item);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nA fila está vazia.");
+                        }
+                        break;
+
+                    case '4':
+
+                        break;
+
+                    case '0':
+                        MostrarMenuPrincipal();
+                        return;
+                    default:
+                        Console.WriteLine("\nOpção inválida. Tente novamente.");
+                        break;
+                }
+            }
+        }
+
+        static void CriarPilha()
+        {
+            Stack<char> pilha = new Stack<char>();
+            Console.WriteLine("\nCriar sua Pilha");
+
+            while (true)
+            {
+                Console.WriteLine("Escolha uma opção: ");
+                Console.WriteLine("1 - adicionar item");
+                Console.WriteLine("2 - remover item");
+                Console.WriteLine("3 - Exibir pilha");
+                Console.WriteLine("4 - Consultar/Buscar Elemento");
+                Console.WriteLine("0 - Voltar para o Menu Principal");
+                Console.WriteLine();
+
+                char escolha = Console.ReadKey().KeyChar;
+
+                switch (escolha)
+                {
+                    case '1':
+                        Console.Write("Digite o item a ser empilhado: ");
+                        char EmpilharItem = Console.ReadKey().KeyChar;
+                        pilha.Push(EmpilharItem);
+                        Console.WriteLine($"{EmpilharItem} empilhado.");
+                        break;
+                    case '2':
+                        if (pilha.Count > 0)
+                        {
+                            char DesempilharItem = pilha.Pop();
+                            Console.WriteLine($"{DesempilharItem} desempilhado.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("sua pilha está vazia.");
+                        }
+                        break;
+                    case '3':
+                        if (pilha.Count > 0)
+                        {
+                            Console.WriteLine("\nelementos da Pilha");
+                            foreach (var item in pilha)
+                            {
+                                Console.WriteLine(item);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nsua pilha está vazia.");
+                        }
+                        break;
+
+                    case '4':
+
+                        break;
+
+                    case '0':
+                        MostrarMenuPrincipal();
+                        return;
+
+                    default:
+                        Console.WriteLine("Opção inválida");
+                        break;
+                }
+            }
+        }
+        static void CriarVetor()
+        {
+            char[] vetor;
+            Console.WriteLine("Criar Vetor");
+            
+        }
+        static void CriarMatriz()
+        {
+            char[,] matriz;
+            Console.WriteLine("Criar Matriz");
+
+        }
+    }
+}
