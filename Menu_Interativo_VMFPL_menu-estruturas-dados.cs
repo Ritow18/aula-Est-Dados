@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 //  Algoritmos de Pesquisa (vistos na aula de 13/05) não é necessario fazer essa opção no Menu
-namespace desafioOpcionalProva
+namespace Menu_interativo_entrutura_de_dados_VMFPL
 {
     class Program
     {
