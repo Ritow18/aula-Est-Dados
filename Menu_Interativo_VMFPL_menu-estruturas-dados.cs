@@ -1,12 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 //  Algoritmos de Pesquisa (vistos na aula de 13/05) não é necessario fazer essa opção no Menu
 namespace desafioOpcionalProva
 {
@@ -501,7 +495,7 @@ namespace desafioOpcionalProva
                 Console.Clear();
                 int j = 0,k = 0;
 
-                if (matriz != null && !MatVazia(matriz))
+                if (matriz != null || !MatVazia(matriz))
                 {
                     bool charvalido = false;
                     Console.WriteLine("Já existe uma matriz criada, ao adicionar item novamente, voce\n" +
@@ -537,49 +531,111 @@ namespace desafioOpcionalProva
                 }
                 return;
             }
-            private static void RemItem() 
+            private static void RemItem()
             {
                 Console.Clear();
-                if (MatVazia(matriz))
+                if (matriz == null || MatVazia(matriz))
                 {
-                    Console.WriteLine("sua Matriz está vazia!");
+                    Console.WriteLine("Sua matriz está vazia ou não foi criada!");
+                    Console.ReadKey();
                     return;
                 }
-                bool contRemovendo = true;
+
+                bool contRem = true;
                 do
                 {
                     ExibirItem();
-                    Console.WriteLine("Para remover, digite a linha e a coluna que deseja remover de sua matriz (começando de 0 e separadas por espaço).");
-                    int linRemover, ColRemover;
-                    bool coordVal = false;
-                    do
+                    Console.WriteLine("\nPara remover, digite a linha e a coluna do item que deseja remover (começando de 0 e separadas por espaço, ex: 0 1  irá eliminar o elemento da linha 0 coluna 1).");
+                    Console.WriteLine("Digite 'sair' para voltar ao menu da matriz.");
+
+                    string input = Console.ReadLine();
+                    if (input.ToLower() == "sair")
                     {
-                        Console.Write($"digite a linha ( da linha 0 até a linha{linMat-1}):");
-                        string[] lincolmatrem = Console.ReadLine().Split(' ');
-                        if (
-                            int.TryParse(lincolmatrem[0], out linRemover) &&
-                            int.TryParse(lincolmatrem[1], out ColRemover) &&
-                            linRemover > 0 && linRemover < linMat && 
-                            ColRemover > 0 && linRemover < colMat
-                            )
+                        contRem = false;
+                        continue;
+                    }
+
+                    string[] coords = input.Split(' ');
+                    int linRem, colRem;
+
+                    if (coords.Length == 2 &&
+                        int.TryParse(coords[0], out linRem) &&
+                        int.TryParse(coords[1], out colRem) &&
+                        linRem >= 0 && linRem < linMat &&
+                        colRem >= 0 && colRem < colMat)
+                    {
+                        if (!string.IsNullOrEmpty(matriz[linRem, colRem]))
                         {
-
-
+                            Console.WriteLine($"Removendo '{matriz[linRem, colRem]}' da posição [{linRem},{colRem}]");
+                            matriz[linRem, colRem] = null; 
+                            Console.WriteLine("Item removido com sucesso!");
                         }
-
-                    } while (!coordVal);
-
-                } while (contRemovendo);
+                        else
+                        {
+                            Console.WriteLine("Esta posição já está vazia!");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Coordenadas inválidas, digite a linha e a coluna corretamente.");
+                    }
+                    Console.ReadKey(); 
+                } while (contRem);
             }
+
             private static void ExibirItem()
             {
                 Console.Clear();
+                if (matriz == null || MatVazia(matriz))
+                {
+                    Console.WriteLine("Sua matriz está vazia ou não foi criada!");
+                    Console.ReadKey();
+                    return;
+                }
 
+                Console.WriteLine("Elementos da Matriz:");
+                for (int j = 0; j < linMat; j++)
+                {
+                    for (int k = 0; k < colMat; k++)
+                    {
+                        Console.Write($"[{j},{k}]: {matriz[j, k] ?? "Vazio"}\t");//(tentando usar interrogação, objetivo: só mostrar vazio caso não haja elemento)
+                    }
+                    Console.WriteLine(); 
+                }
+                Console.ReadKey();
             }
-            private static void ProcItem() 
+
+            private static void ProcItem()
             {
                 Console.Clear();
+                if (matriz == null || MatVazia(matriz))
+                {
+                    Console.WriteLine("Sua matriz está vazia ou não foi criada!");
+                    Console.ReadKey();
+                    return;
+                }
 
+                Console.Write("Digite o item que você quer buscar na matriz: ");
+                string itemBuscar = Console.ReadLine();
+                bool encontrado = false;
+
+                Console.WriteLine($"\nBuscando '{itemBuscar}' na matriz...");
+                for (int j = 0; j < linMat; j++)
+                {
+                    for (int k = 0; k < colMat; k++)
+                    {
+                        if (matriz[j, k] != null && matriz[j, k].Equals(itemBuscar, StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine($"O item '{itemBuscar}' foi encontrado na posição [{j},{k}].");
+                            encontrado = true;
+                        }
+                    }
+                }
+                if (encontrado==false)
+                {
+                    Console.WriteLine($"O item '{itemBuscar}' não foi encontrado na matriz.");
+                }
+                Console.ReadKey();
             }
             private static bool MatVazia(string[,] mat)
             {
@@ -599,3 +655,4 @@ namespace desafioOpcionalProva
         }
     }
 }
+
