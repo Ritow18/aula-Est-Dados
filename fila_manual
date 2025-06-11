@@ -1,11 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Fila_manual
 {
     class Program
@@ -26,10 +19,9 @@ namespace Fila_manual
             {
                 return tamanho == 0;
             }
-
             public void enqueue(char carac)
             {
-                if(tamanho == capacidade)
+                if (tamanho == capacidade)
                 {
                     Console.WriteLine("fila cheia");
                     return;
@@ -38,7 +30,6 @@ namespace Fila_manual
                 elementos[fim] = carac;
                 tamanho++;
             }
-            //desenfileirar
             public char dequeue()
             {
                 if (empty())
@@ -51,8 +42,7 @@ namespace Fila_manual
                 tamanho--;
                 return valor;
             }
-            //exibir valores 
-            public void exibir() 
+            public void exibir()
             {
                 if (empty())
                 {
@@ -60,10 +50,10 @@ namespace Fila_manual
                     return;
                 }
                 Console.WriteLine("fila: ");
-                for (int i = 0; i < tamanho; i++) 
+                for (int i = 0; i < tamanho; i++)
                 {
-                    int index = (inicio +i) % capacidade;
-                    Console.Write(elementos[index]+" ");
+                    int index = (inicio + i) % capacidade;
+                    Console.Write(elementos[index] + " ");
                 }
                 Console.WriteLine();
             }
@@ -71,18 +61,15 @@ namespace Fila_manual
             {
                 return tamanho;
             }
-            //elementos no inicio da fila
             public char head()
             {
                 return elementos[inicio];
             }
-
         }
         static void Main(string[] args)
         {
             fila fila = new fila(10);
-            char valor;
-            int opcao;
+            char valor, opcao;
             do
             {
                 Console.WriteLine("Escolha uma das seguintes opções: ");
@@ -92,34 +79,33 @@ namespace Fila_manual
                 Console.WriteLine("3 - desenfileirar");
                 Console.WriteLine("4 - tamanho da fila");
                 Console.WriteLine("5 - Exibir elementos da fila");
-                opcao = int.Parse(Console.ReadKey());
-                switch (opcao) 
+                opcao = Console.ReadKey().KeyChar;
+                switch (opcao)
                 {
-                    case 0:
+                    case '0':
                         Console.WriteLine("Finalizando o sistema...");
                         break;
-                    case 1:
+                    case '1':
                         Console.WriteLine("Digite o valor para entrar na fila");
                         valor = Console.ReadKey().KeyChar;
                         fila.enqueue(valor);
                         break;
-                    case 2:
+                    case '2':
                         valor = fila.head();
-                        Console.WriteLine("inicio da fila: "+valor);
+                        Console.WriteLine("inicio da fila: " + valor);
                         break;
-                    case 3:
+                    case '3':
                         valor = fila.dequeue();
-                        Console.WriteLine("elemento desenfileirado: "+valor);
+                        Console.WriteLine("elemento desenfileirado: " + valor);
                         break;
-                    case 4:
-                        Console.WriteLine("quantidade de elementos da fila"+fila.size());
+                    case '4':
+                        Console.WriteLine("quantidade de elementos da fila" + fila.size());
                         break;
-                    case 5:
+                    case '5':
                         fila.exibir();
                         break;
                 }
-
-            } while (opcao != 0);
+            } while (opcao != '0');
         }
     }
 }
