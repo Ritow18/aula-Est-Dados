@@ -1,13 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace algoritmoDeBusca
 {
 
-    public class staticList<T>where T : IComparable<T>
+    public class staticList<T> where T : IComparable<T>
     {
         private T[] elements;
         private int size, capacity;
@@ -20,7 +16,7 @@ namespace algoritmoDeBusca
         //insert
         public void insert(T Value)
         {
-            if (size == capacity) 
+            if (size == capacity)
             {
                 Console.WriteLine("lista cheia.");
                 return;
@@ -31,7 +27,7 @@ namespace algoritmoDeBusca
         //display
         public void display()
         {
-            if (size == 0) 
+            if (size == 0)
             {
                 Console.WriteLine("Lista Vazia.");
                 return;
@@ -60,22 +56,20 @@ namespace algoritmoDeBusca
         {
             int start = 0;
             int end = size - 1;
-            while (start <= end) 
+            while (start <= end)
             {
-                int middle = (start + end)/2;
+                int middle = (start + end) / 2;
                 if (elements[middle].CompareTo(Value) == 0)
                 {
                     return middle;
                 }
-                // metade de um valor quebrado para menor
-                if (elements[middle].CompareTo(Value)>0)
+                if (elements[middle].CompareTo(Value) > 0)
                 {
-                    start = middle-1;
+                    start = middle - 1;
                 }
-                //metade de um valor quebrado para maior
                 else
                 {
-                    start=middle+1;
+                    start = middle + 1;
                 }
             }
             return -1;
@@ -88,9 +82,9 @@ namespace algoritmoDeBusca
             Console.WriteLine("digite a quantidade de elementos da lista: ");
             int n = int.Parse(Console.ReadLine());
             staticList<int> list = new staticList<int>(n);
-            for (int i = 0;i < n; i++)
+            for (int i = 0; i < n; i++)
             {
-                Console.WriteLine($"Digite o {i+1} elemento.");//ou digite o primeiro elemento
+                Console.WriteLine($"Digite o {i + 1} elemento.");
                 int value = int.Parse(Console.ReadLine());
                 list.insert(value);
             }
@@ -98,12 +92,11 @@ namespace algoritmoDeBusca
 
             Console.WriteLine("digite o valor a ser procurado.");
             int elementSearch = int.Parse(Console.ReadLine());
-            //sequencial search
             int sequencialResult = list.sequencialSearch(elementSearch);
             if (sequencialResult != -1)
             {
-                Console.WriteLine($"o elemento é o: {elementSearch} " + 
-                    $"encontrado na posição {sequencialResult} " + 
+                Console.WriteLine($"o elemento é o: {elementSearch} " +
+                    $"encontrado na posição {sequencialResult} " +
                     $" - (Busca sequencial)");
             }
             else
@@ -111,7 +104,6 @@ namespace algoritmoDeBusca
                 Console.WriteLine($"Elementos {elementSearch} + " +
                     $"não encontrado - (Busca Sequencial)");
             }
-            //busca binária (lista precisa estar ordenada para funcionar)
             int binaryResult = list.binarySearch(elementSearch);
             if (sequencialResult != -1)
             {
