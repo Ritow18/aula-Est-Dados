@@ -1,74 +1,70 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace stack_pilha
+namespace StackFunctions
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Stack<char> pilha = new Stack<char>();
-            char opcao;
+            Stack<char> stack = new Stack<char>();
+            char option;
             do
             {
-                Console.WriteLine("escolha uma opção: ");
-                Console.WriteLine("1 - Inserir elemento na Pilha: ");
-                Console.WriteLine("2 - Remover elemento da Pilha: ");
-                Console.WriteLine("3 - Exibir elementos da Pilha: ");
-                Console.WriteLine("4 - Mostrar topo da Pilha: ");
-                Console.WriteLine("5 - Mostrar tamanho da Pilha: ");
-                Console.WriteLine("0 - Sair: ");
-                opcao = Console.ReadKey().KeyChar;
+                Console.WriteLine("Choose an option: ");
+                Console.WriteLine("1 - Push element onto Stack: ");
+                Console.WriteLine("2 - Pop element from Stack: ");
+                Console.WriteLine("3 - Display Stack elements: ");
+                Console.WriteLine("4 - Show top of Stack: ");
+                Console.WriteLine("5 - Show Stack size: ");
+                Console.WriteLine("0 - Exit: ");
+                option = Console.ReadKey().KeyChar;
                 Console.WriteLine();
-                switch (opcao)
+                switch (option)
                 {
                     case '1':
-                        Console.WriteLine("digite o caractere que deseja empilhar");
-                        char cara = Console.ReadKey().KeyChar;
+                        Console.WriteLine("Enter the character you want to push:");
+                        char characterToPush = Console.ReadKey().KeyChar;
                         Console.WriteLine();
-                        pilha.Push(cara);
+                        stack.Push(characterToPush);
                         break;
                     case '2':
-                        if (pilha.Count > 0)
-                            Console.WriteLine("elemento de cima removido: " + pilha.Pop());
+                        if (stack.Count > 0)
+                            Console.WriteLine("Top element removed: " + stack.Pop());
                         else
-                            Console.WriteLine("Pilha vazia");
-                            break;
+                            Console.WriteLine("Stack is empty");
+                        break;
                     case '3':
-                        if (pilha.Count == 0)
-                            Console.WriteLine("Pilha vazia");
+                        if (stack.Count == 0)
+                            Console.WriteLine("Stack is empty");
                         else
-                            Console.WriteLine("elementos da pilha: ");
-                        foreach(var item in pilha)
+                            Console.WriteLine("Stack elements: ");
+                        foreach (var item in stack)
                         {
                             Console.WriteLine(" " + item);
                         }
-                            break;
+                        break;
                     case '4':
-                        if (pilha.Count > 0)
-                            Console.WriteLine("o topo da pilha é o: " + pilha.Peek());
+                        if (stack.Count > 0)
+                            Console.WriteLine("The top of the stack is: " + stack.Peek());
                         else
-                            Console.WriteLine("não há nenhum item na pilha");
+                            Console.WriteLine("There are no items in the stack");
 
-                            Console.WriteLine();
+                        Console.WriteLine();
 
                         break;
                     case '5':
-                        Console.WriteLine("o tamanho da pilha é:"+pilha.Count);
+                        Console.WriteLine("The size of the stack is: " + stack.Count);
                         Console.WriteLine();
                         break;
                     case '0':
-                        Console.WriteLine("saindo....");
+                        Console.WriteLine("Exiting....");
                         break;
-             
+
                 }
                 Console.WriteLine();
 
-            } while (opcao != '0');
+            } while (option != '0');
 
         }
     }
