@@ -1,137 +1,123 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-
-
-namespace pilha
+namespace ManualStack
 {
-    class pilha
+    class Stack
     {
-        private char[] elementos;
-        private int topo, tamanho;
-        public pilha(int capacidade)
-        {
-            elementos = new char[capacidade];
-            topo = -1;
-            tamanho = 0;
+        private char[] elements;
+        private int top, size;
 
-        }
-        //método para adicionar elementos na pilha
-        public void push(char cara)
+        public Stack(int capacity)
         {
-            //validação futura
-            if (tamanho == elementos.Length)
+            elements = new char[capacity];
+            top = -1;
+            size = 0;
+        }
+        public void Push(char character)
+        {
+            if (size == elements.Length)
             {
-                Console.WriteLine("A pilha está cheia!");
+                Console.WriteLine("The stack is full!");
                 return;
             }
-            elementos[++topo] = cara;
-            tamanho++;
+            elements[++top] = character;
+            size++;
         }
-        //método para mostrar quais são os elementos da pilha
-        public void exibir()
+        public void Display()
         {
-            //validacao futuras
-            if (Empty())
+            if (IsEmpty())
             {
-                Console.WriteLine("Sua pilha está vazia!");
+                Console.WriteLine("Your stack is empty!");
                 return;
             }
-            Console.WriteLine("Pilha: ");
-            for (int i = topo; i >= 0; i--)
+            Console.WriteLine("Stack: ");
+            for (int i = top; i >= 0; i--)
             {
-                Console.WriteLine(" " + elementos[i]);
+                Console.WriteLine(" " + elements[i]);
             }
         }
-        // método para retornar o tamanho da pilha 
-        public int size()
+        public int Size()
         {
-            return tamanho;
+            return size;
         }
-        //metodo para obter o elemento do topo da pilha
-        public char top()
+        public char Peek()
         {
-            //validações futuras
-            if (Empty())
+            if (IsEmpty())
             {
-                Console.WriteLine("a pilha está sem elementos para ser mostrado!");
-                return '\0'; // ao lado do return, é a mesma coisa que dizer que ele é nulo "null"
+                Console.WriteLine("The stack has no elements to display!");
+                return '\0'; 
             }
             else
             {
-                return elementos[topo];
+                return elements[top];
             }
         }
-        //metodo para conseguir remover o elemento do topo da torre
-        public char pop()
+        public char Pop()
         {
-            if (Empty())
+            if (IsEmpty())
             {
-                Console.WriteLine("sua pilha está vazia! não há elementos para ser retirado");
+                Console.WriteLine("Your stack is empty! No elements to remove.");
+                return '\0';
             }
 
-            char c = elementos[topo--];
-            tamanho--;
+            char c = elements[top--];
+            size--;
             return c;
         }
 
-        public bool Empty()
+        public bool IsEmpty()
         {
-            return tamanho == 0;
+            return size == 0;
         }
+    }
 
-
-        class Program
+    class Program
+    {
+        static void Main()
         {
-            static void Main()
+            Stack stack = new Stack(10);
+            char option;
+
+            do
             {
-                pilha pilha = new pilha(10);
-                char opcao;
+                Console.WriteLine("Choose an option: ");
+                Console.WriteLine("1 - Push an element onto the Stack: ");
+                Console.WriteLine("2 - Pop an element from the Stack: ");
+                Console.WriteLine("3 - Display the Stack elements: ");
+                Console.WriteLine("4 - Show the top of the Stack: ");
+                Console.WriteLine("5 - Show the Stack size: ");
+                Console.WriteLine("0 - Exit: ");
 
-                do
+                option = Console.ReadKey().KeyChar;
+                Console.ReadLine(); 
+                switch (option)
                 {
-                    Console.WriteLine("escolha uma opção: ");
-                    Console.WriteLine("1 - Inserir um elemento na Pilha: ");
-                    Console.WriteLine("2 - Remover um elemento da Pilha: ");
-                    Console.WriteLine("3 - Exibir os elementos da Pilha: ");
-                    Console.WriteLine("4 - Mostrar o topo da Pilha: ");
-                    Console.WriteLine("5 - Mostrar o tamanho da Pilha: ");
-                    Console.WriteLine("0 - Sair: ");
-
-                    opcao = Console.ReadKey().KeyChar; // le somente uma tecla 
-                    Console.ReadLine();
-                    switch (opcao)
-                    {
-                        case '1':
-                            Console.WriteLine(" ");
-                            char cara = Console.ReadKey().KeyChar;
-                            Console.WriteLine();
-                            pilha.push(cara);
-                            break;
-                        case '2':
-                            Console.WriteLine("Elemento removido: " + pilha.pop());
-                            break;
-                        case '3':
-                            pilha.exibir();
-                            break;
-                        case '4':
-                            Console.WriteLine("Topo da pilha: " + pilha.top());
-                            break;
-                        case '5':
-                            Console.WriteLine("Tamanho da Pilha: " + pilha.size());
-                            break;
-                        case '0':
-                            Console.WriteLine("Saindo...");
-                            break;
-                        default:
-                            Console.WriteLine("Opção invalida!");
-                            break;
-                    }
-                } while (opcao != '0');
-            }
+                    case '1':
+                        Console.WriteLine("Enter the character to push:");
+                        char characterToPush = Console.ReadKey().KeyChar;
+                        Console.WriteLine();
+                        stack.Push(characterToPush);
+                        break;
+                    case '2':
+                        Console.WriteLine("Element removed: " + stack.Pop());
+                        break;
+                    case '3':
+                        stack.Display();
+                        break;
+                    case '4':
+                        Console.WriteLine("Top of the stack: " + stack.Peek());
+                        break;
+                    case '5':
+                        Console.WriteLine("Stack size: " + stack.Size());
+                        break;
+                    case '0':
+                        Console.WriteLine("Exiting...");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option!");
+                        break;
+                }
+            } while (option != '0');
         }
     }
 }
