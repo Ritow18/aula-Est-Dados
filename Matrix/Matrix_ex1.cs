@@ -1,33 +1,31 @@
 using System;
-namespace Matriz
+
+namespace MatrixOperations
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            string[] dimensoes = Console.ReadLine().Split(' ');
-            int M = int.Parse(dimensoes[0]);
-            int N = int.Parse(dimensoes[1]);
-
-            int[,] matriz = new int[M, N];
-
+            string[] dimensions = Console.ReadLine().Split(' ');
+            int M = int.Parse(dimensions[0]); 
+            int N = int.Parse(dimensions[1]); 
+            int[,] matrix = new int[M, N];
             for (int i = 0; i < M; i++)
             {
-                string[] linha = Console.ReadLine().Split(' ');
+                string[] row = Console.ReadLine().Split(' ');
                 for (int j = 0; j < N; j++)
                 {
-                    matriz[i, j] = int.Parse(linha[j]);
+                    matrix[i, j] = int.Parse(row[j]);
                 }
             }
-
-            Console.WriteLine("VALORES NEGATIVOS:");
+            Console.WriteLine("NEGATIVE VALUES:");
             for (int i = 0; i < M; i++)
             {
                 for (int j = 0; j < N; j++)
                 {
-                    if (matriz[i, j] < 0)
+                    if (matrix[i, j] < 0)
                     {
-                        Console.WriteLine(matriz[i, j]);
+                        Console.WriteLine(matrix[i, j]);
                     }
                 }
             }
