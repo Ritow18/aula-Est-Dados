@@ -1,490 +1,503 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-//  Algoritmos de Pesquisa (vistos na aula de 13/05) não é necessario fazer essa opção no Menu
-namespace Menu_interativo_entrutura_de_dados_VMFPL
+
+namespace Interactive_Data_Structure_Menu_VMFPL
 {
     class Program
     {
         static void Main(string[] args)
-
         {
-            char escolha;
-            MostrarMenuPrincipal();
+            char choice;
+            ShowMainMenu();
             do
             {
-                escolha = Console.ReadKey().KeyChar;
+                choice = Console.ReadKey().KeyChar;
 
-                switch (escolha)
+                switch (choice)
                 {
                     case '1':
-                        CriarLista();
+                        CreateList();
                         break;
                     case '2':
-                        CriarFila();
+                        CreateQueue();
                         break;
                     case '3':
-                        CriarPilha();
+                        CreateStack();
                         break;
                     case '4':
-                        CriarVetor();
+                        CreateVector();
                         break;
                     case '5':
-                        CriarMatrizPqIssoEhComplexo.CriarMatriz();
+                        MatrixOperationsWhyThisIsComplex.CreateMatrix();
                         break;
                     case '0':
-                        Console.WriteLine("Saindo do programa...");
+                        Console.WriteLine("Exiting program...");
                         break;
                     default:
-                        Console.WriteLine("Opção inválida!");
-                        MostrarMenuPrincipal();
+                        Console.WriteLine("Invalid option!");
+                        ShowMainMenu();
                         break;
                 }
-            } while (escolha != '0');
+            } while (choice != '0');
         }
 
-        static void MostrarMenuPrincipal()
+        static void ShowMainMenu()
         {
-            Console.WriteLine("\n Menu Principal");
-            Console.WriteLine("Escolha uma opção: ");
-            Console.WriteLine("1 - Criar Lista");
-            Console.WriteLine("2 - Criar Fila");
-            Console.WriteLine("3 - Criar Pilha");
-            Console.WriteLine("4 - Criar Vetor");
-            Console.WriteLine("5 - Criar Matriz");
-            Console.WriteLine("0 - Sair");
+            Console.WriteLine("\n Main Menu");
+            Console.WriteLine("Choose an option: ");
+            Console.WriteLine("1 - Create List");
+            Console.WriteLine("2 - Create Queue");
+            Console.WriteLine("3 - Create Stack");
+            Console.WriteLine("4 - Create Vector");
+            Console.WriteLine("5 - Create Matrix");
+            Console.WriteLine("0 - Exit");
         }
 
-        static void CriarLista()
+        static void CreateList()
         {
-            List<char> lista = new List<char>();
-            Console.WriteLine("\nCriar sua Lista");
+            List<char> list = new List<char>();
+            Console.WriteLine("\nCreate your List");
             while (true)
             {
-                Console.WriteLine("Escolha uma opção: ");
-                Console.WriteLine("1 - Adicionar item");
-                Console.WriteLine("2 - Exibir lista");
-                Console.WriteLine("3 - Remover elemento da lista");
-                Console.WriteLine("4 - Consultar/Buscar Elemento");
-                Console.WriteLine("0 - Voltar para o Menu Principal");
+                Console.WriteLine("Choose an option: ");
+                Console.WriteLine("1 - Add item");
+                Console.WriteLine("2 - Display list");
+                Console.WriteLine("3 - Remove element from list");
+                Console.WriteLine("4 - Query/Search Element");
+                Console.WriteLine("0 - Return to Main Menu");
 
-                char escolha = Console.ReadKey().KeyChar;
+                char choice = Console.ReadKey().KeyChar;
 
-                switch (escolha)
+                switch (choice)
                 {
                     case '1':
-                        Console.Write("Digite um item a ser adicionado: ");
-                        char adicionarItem = Console.ReadKey().KeyChar;
+                        Console.Write("Enter an item to be added: ");
+                        char addItem = Console.ReadKey().KeyChar;
 
-                        lista.Add(adicionarItem);
+                        list.Add(addItem);
 
-                        Console.WriteLine($"'{adicionarItem}' adicionado à lista.");
+                        Console.WriteLine($"'{addItem}' added to the list.");
                         break;
 
                     case '2':
-                        if (lista.Count > 0)
+                        if (list.Count > 0)
                         {
-                            Console.WriteLine("\nelementos da Lista");
-                            foreach (var item in lista)
+                            Console.WriteLine("\nList elements");
+                            foreach (var item in list)
                             {
                                 Console.WriteLine(item);
                             }
                         }
                         else
                         {
-                            Console.WriteLine("sua lista está vazia.");
+                            Console.WriteLine("Your list is empty.");
                         }
                         break;
 
                     case '3':
-                        if (lista.Count > 0)
+                        if (list.Count > 0)
                         {
-                            Console.WriteLine("Qual elemento da Lista você gostaria de Remover? ");
-                            foreach (var item in lista)
+                            Console.WriteLine("Which list element would you like to remove? ");
+                            foreach (var item in list)
                             {
                                 Console.WriteLine(item);
                             }
-                            char ItemRemover = Console.ReadKey().KeyChar;
-                            Console.WriteLine($"item removido: {ItemRemover}");
-                            lista.Remove(ItemRemover);
+                            char removeItem = Console.ReadKey().KeyChar;
+                            Console.WriteLine($"Item removed: {removeItem}");
+                            list.Remove(removeItem);
                         }
                         else
                         {
-                            Console.WriteLine("\nsua lista está vazia.");
+                            Console.WriteLine("\nYour list is empty.");
                         }
                         break;
 
                     case '4':
-                        if (lista.Count > 0)
+                        if (list.Count > 0)
                         {
-                            Console.Write("Digite qual elemento voce deseja consultar: ");
-                            char consulta = Console.ReadKey().KeyChar;
-                            if (lista.Contains(consulta))
+                            Console.Write("Enter which element you want to query: ");
+                            char query = Console.ReadKey().KeyChar;
+                            if (list.Contains(query))
                             {
-                                Console.WriteLine($"{consulta} está na lista!");
+                                Console.WriteLine($"{query} is in the list!");
                             }
                             else
                             {
-                                Console.WriteLine($"não foi encontrado {consulta} na lista");
+                                Console.WriteLine($"{query} was not found in the list");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Sua lista está vazia!");
+                            Console.WriteLine("Your list is empty!");
                         }
                         break;
 
                     case '0':
-                        MostrarMenuPrincipal();
+                        ShowMainMenu();
                         return;
 
                     default:
-                        Console.WriteLine("Opção inválida. Tente novamente.");
-                        break;
-                }
-            }
-        }
-        static void CriarFila()
-        {
-            Queue<char> fila = new Queue<char>();
-            Console.WriteLine("\nCriar sua Fila");
-
-            while (true)
-            {
-                Console.WriteLine("Escolha uma opção: ");
-                Console.WriteLine("1 - adicionar item");
-                Console.WriteLine("2 - remover item");
-                Console.WriteLine("3 - Exibir fila");
-                Console.WriteLine("4 - Consultar/Buscar Elemento");
-                Console.WriteLine("0 - Voltar para o Menu Principal\n");
-
-                char escolha = Console.ReadKey().KeyChar;
-
-                switch (escolha)
-                {
-                    case '1':
-                        Console.Write("\nDigite o item a ser enfileirado: ");
-                        char enfileirarItem = Console.ReadKey().KeyChar;
-
-                        fila.Enqueue(enfileirarItem);
-                        Console.WriteLine($"\n{enfileirarItem} enfileirado.");
-
-                        break;
-                    case '2':
-                        if (fila.Count > 0)
-                        {
-                            char desenfileirarItem = fila.Dequeue();
-                            Console.WriteLine($"\n{desenfileirarItem} desenfileirado.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nA fila está vazia.");
-                        }
-                        break;
-                    case '3':
-                        if (fila.Count > 0)
-                        {
-                            Console.WriteLine("elementos da Fila: ");
-                            foreach (var item in fila)
-                            {
-                                Console.WriteLine(item);
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nA fila está vazia.");
-                        }
-                        break;
-
-                    case '4':
-                        if (fila.Count > 0)
-                        {
-                            Console.Write("Digite qual elemento voce deseja consultar: ");
-                            char consulta = Console.ReadKey().KeyChar;
-                            if (fila.ToArray().Contains(consulta))
-                            {
-                                Console.WriteLine($"{consulta} está presente em sua Fila!");
-                            }
-                            else
-                            {
-                                Console.WriteLine($"Sua Fila não contém o elemento {consulta}!");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Sua fila está vazia!");
-                        }
-                        break;
-
-                    case '0':
-                        MostrarMenuPrincipal();
-                        return;
-                    default:
-                        Console.WriteLine("\nOpção inválida. Tente novamente.");
+                        Console.WriteLine("Invalid option. Please try again.");
                         break;
                 }
             }
         }
 
-        static void CriarPilha()
+        static void CreateQueue()
         {
-            Stack<char> pilha = new Stack<char>();
-            Console.WriteLine("\nCriar sua Pilha");
+            Queue<char> queue = new Queue<char>();
+            Console.WriteLine("\nCreate your Queue");
 
             while (true)
             {
-                Console.WriteLine("Escolha uma opção: ");
-                Console.WriteLine("1 - adicionar item");
-                Console.WriteLine("2 - remover item");
-                Console.WriteLine("3 - Exibir pilha");
-                Console.WriteLine("4 - Consultar/Buscar Elemento");
-                Console.WriteLine("0 - Voltar para o Menu Principal");
+                Console.WriteLine("Choose an option: ");
+                Console.WriteLine("1 - Add item");
+                Console.WriteLine("2 - Remove item");
+                Console.WriteLine("3 - Display queue");
+                Console.WriteLine("4 - Query/Search Element");
+                Console.WriteLine("0 - Return to Main Menu\n");
+
+                char choice = Console.ReadKey().KeyChar;
+
+                switch (choice)
+                {
+                    case '1':
+                        Console.Write("\nEnter the item to be enqueued: ");
+                        char enqueueItem = Console.ReadKey().KeyChar;
+
+                        queue.Enqueue(enqueueItem);
+                        Console.WriteLine($"\n{enqueueItem} enqueued.");
+
+                        break;
+                    case '2':
+                        if (queue.Count > 0)
+                        {
+                            char dequeueItem = queue.Dequeue();
+                            Console.WriteLine($"\n{dequeueItem} dequeued.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nThe queue is empty.");
+                        }
+                        break;
+                    case '3':
+                        if (queue.Count > 0)
+                        {
+                            Console.WriteLine("Queue elements: ");
+                            foreach (var item in queue)
+                            {
+                                Console.WriteLine(item);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nThe queue is empty.");
+                        }
+                        break;
+
+                    case '4':
+                        if (queue.Count > 0)
+                        {
+                            Console.Write("Enter which element you want to query: ");
+                            char query = Console.ReadKey().KeyChar;
+                            if (queue.ToArray().Contains(query))
+                            {
+                                Console.WriteLine($"{query} is present in your Queue!");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Your Queue does not contain the element {query}!");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Your queue is empty!");
+                        }
+                        break;
+
+                    case '0':
+                        ShowMainMenu();
+                        return;
+                    default:
+                        Console.WriteLine("\nInvalid option. Please try again.");
+                        break;
+                }
+            }
+        }
+
+        static void CreateStack()
+        {
+            Stack<char> stack = new Stack<char>();
+            Console.WriteLine("\nCreate your Stack");
+
+            while (true)
+            {
+                Console.WriteLine("Choose an option: ");
+                Console.WriteLine("1 - Add item");
+                Console.WriteLine("2 - Remove item");
+                Console.WriteLine("3 - Display stack");
+                Console.WriteLine("4 - Query/Search Element");
+                Console.WriteLine("0 - Return to Main Menu");
                 Console.WriteLine();
 
-                char escolha = Console.ReadKey().KeyChar;
+                char choice = Console.ReadKey().KeyChar;
 
-                switch (escolha)
+                switch (choice)
                 {
                     case '1':
-                        Console.Write("Digite o item a ser empilhado: ");
-                        char EmpilharItem = Console.ReadKey().KeyChar;
-                        pilha.Push(EmpilharItem);
-                        Console.WriteLine($"{EmpilharItem} empilhado.");
+                        Console.Write("Enter the item to be pushed: ");
+                        char pushItem = Console.ReadKey().KeyChar;
+                        stack.Push(pushItem);
+                        Console.WriteLine($"{pushItem} pushed.");
                         break;
                     case '2':
-                        if (pilha.Count > 0)
+                        if (stack.Count > 0)
                         {
-                            char DesempilharItem = pilha.Pop();
-                            Console.WriteLine($"{DesempilharItem} desempilhado.");
+                            char popItem = stack.Pop();
+                            Console.WriteLine($"{popItem} popped.");
                         }
                         else
                         {
-                            Console.WriteLine("sua pilha está vazia.");
+                            Console.WriteLine("Your stack is empty.");
                         }
                         break;
                     case '3':
-                        if (pilha.Count > 0)
+                        if (stack.Count > 0)
                         {
-                            Console.WriteLine("\nelementos da Pilha");
-                            foreach (var item in pilha)
+                            Console.WriteLine("\nStack elements");
+                            foreach (var item in stack)
                             {
                                 Console.WriteLine(item);
                             }
                         }
                         else
                         {
-                            Console.WriteLine("\nsua pilha está vazia.");
+                            Console.WriteLine("\nYour stack is empty.");
                         }
                         break;
 
                     case '4':
-                        if (pilha.Count > 0)
+                        if (stack.Count > 0)
                         {
-                            Console.Write("Digite qual elemento voce deseja consultar: ");
-                            char consulta = Console.ReadKey().KeyChar;
-                            if (pilha.ToArray().Contains(consulta))
+                            Console.Write("Enter which element you want to query: ");
+                            char query = Console.ReadKey().KeyChar;
+                            if (stack.ToArray().Contains(query))
                             {
-                                Console.WriteLine($"{consulta} está em sua pilha!");
+                                Console.WriteLine($"{query} is in your stack!");
                             }
                             else
                             {
-                                Console.WriteLine($"Sua Pilha não contém o elemento {consulta}!");
+                                Console.WriteLine($"Your Stack does not contain the element {query}!");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Sua fila está vazia!");
+                            Console.WriteLine("Your stack is empty!");
                         }
                         break;
 
                     case '0':
-                        MostrarMenuPrincipal();
+                        ShowMainMenu();
                         return;
 
                     default:
-                        Console.WriteLine("Opção inválida");
+                        Console.WriteLine("Invalid option");
                         break;
                 }
             }
         }
-        static void CriarVetor()
+
+        static void CreateVector()
         {
-            Console.WriteLine("Criar Vetor");
-            Console.Write("por favor, digite qual tamanho que voce deseja ter em seu vetor: ");
-            int tamanhoV, casa, i = 0;
-            tamanhoV = int.Parse(Console.ReadLine());
-            string[] vetor = new string[tamanhoV];
-            string itemV;
+            Console.WriteLine("Create Vector");
+            Console.Write("Please, enter the desired size for your vector: ");
+            int vectorSize;
+            int currentItemIndex = 0; 
+            while (!int.TryParse(Console.ReadLine(), out vectorSize) || vectorSize <= 0)
+            {
+                Console.Write("Invalid input. Please enter a positive integer for the vector size: ");
+            }
+
+            string[] vector = new string[vectorSize];
+            string vectorItem; 
+
             while (true)
             {
-                Console.WriteLine("Escolha uma opção: ");
-                Console.WriteLine("1 - adicionar item");
-                Console.WriteLine("2 - remover item");
-                Console.WriteLine("3 - Exibir Vetor");
-                Console.WriteLine("4 - Consultar/Buscar Elemento");
-                Console.WriteLine("0 - Voltar para o Menu Principal");
+                Console.WriteLine("Choose an option: ");
+                Console.WriteLine("1 - Add item");
+                Console.WriteLine("2 - Remove item");
+                Console.WriteLine("3 - Display Vector");
+                Console.WriteLine("4 - Query/Search Element");
+                Console.WriteLine("0 - Return to Main Menu");
                 Console.WriteLine();
-                char escolha = Console.ReadKey().KeyChar;
 
-                switch (escolha)
+                char choice = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+
+                switch (choice)
                 {
                     case '1':
-                        Console.Write("digite qual item que voce deseja adicionar em seu vetor: ");
-                        if (vetor.Length != tamanhoV)
+                        if (currentItemIndex < vectorSize)
                         {
-                            vetor[i] = Console.ReadLine(); i++;
+                            Console.Write("Enter the item you want to add to your vector: ");
+                            vector[currentItemIndex] = Console.ReadLine();
+                            currentItemIndex++;
+                            Console.WriteLine("Item added successfully.");
                         }
                         else
                         {
-                            Console.WriteLine("seu vetor está cheio!");
+                            Console.WriteLine("Your vector is full!");
                         }
                         break;
 
                     case '2':
-                        if (vetor.Length > 0)
+                        if (currentItemIndex > 0)
                         {
-                            vetor[i] = null; i--;
-                            Console.WriteLine("ultimo item inserido no vetor foi removido...");
+                            currentItemIndex--; 
+                            Console.WriteLine($"Removing '{vector[currentItemIndex]}' from position {currentItemIndex}...");
+                            vector[currentItemIndex] = null; 
+                            Console.WriteLine("Last inserted item in the vector was removed.");
                         }
                         else
                         {
-                            Console.WriteLine("Seu vetor está vazio!");
+                            Console.WriteLine("Your vector is empty!");
                         }
                         break;
 
                     case '3':
-                        if (vetor.Length > 0)
+                        if (vector.Length > 0)
                         {
-                            foreach (string c in vetor)
+                            Console.WriteLine("\nVector elements:");
+                            for (int k = 0; k < vectorSize; k++)
                             {
-                                Console.Write(c);
+                                Console.WriteLine($"[{k}]: {vector[k] ?? "Empty"}");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("seu vetor está vazio!");
+                            Console.WriteLine("Your vector is empty!");
                         }
                         break;
 
                     case '4':
-                        if (vetor.Length > 0)
+                        if (vector.Length > 0)
                         {
-                            Console.WriteLine("digite qual item voce deseja verificar se existe dentro do vetor: ");
-                            itemV = Console.ReadLine();
-                            casa = Array.IndexOf(vetor, itemV);
-                            if (casa != -1)
+                            Console.Write("Enter the item you want to check if it exists in the vector: ");
+                            vectorItem = Console.ReadLine();
+                            int foundIndex = Array.IndexOf(vector, vectorItem); 
+
+                            if (foundIndex != -1)
                             {
-                                Console.WriteLine($"o vetor contém seu item {itemV} na posição {casa}!");
+                                Console.WriteLine($"The vector contains your item '{vectorItem}' at position {foundIndex}!");
                             }
                             else
                             {
-                                Console.WriteLine($"{itemV} não existe dentro de seu vetor");
+                                Console.WriteLine($"'{vectorItem}' does not exist in your vector.");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("seu vetor está vazio!");
+                            Console.WriteLine("Your vector is empty!");
                         }
                         break;
 
                     case '0':
-                        MostrarMenuPrincipal();
+                        ShowMainMenu();
                         return;
 
                     default:
-                        Console.WriteLine("opção invalida!");
+                        Console.WriteLine("Invalid option!");
                         break;
                 }
             }
         }
 
-        public class CriarMatrizPqIssoEhComplexo
+        public class MatrixOperationsWhyThisIsComplex
         {
-            private static string[,] matriz;
-            private static int linMat;
-            private static int colMat;
-            
-            public static void CriarMatriz()
+            private static string[,] matrix;
+            private static int rowCount; 
+            private static int colCount; 
+
+            public static void CreateMatrix()
             {
                 Console.Clear();
-                Console.WriteLine("Criar matriz");
-                bool tamVal = false;
+                Console.WriteLine("Create matrix");
+                bool isValidSize = false;
                 do
                 {
-                    Console.WriteLine("Digite o numero de linhas e colunas " +
-                        "da sua matriz separadas por espaço");
-                    string[] lincolmatriz = Console.ReadLine().Split(' ');
+                    Console.WriteLine("Enter the number of rows and columns for your matrix, separated by a space (e.g., 3 4):");
+                    string[] rowColInput = Console.ReadLine().Split(' ');
 
-                    if( lincolmatriz.Length==2 && 
-                        int.TryParse(lincolmatriz[0], out linMat) && linMat > 0 &&
-                        int.TryParse(lincolmatriz[1], out colMat) && colMat > 0 // ;---; if gigante do cacete, medo de dar erro
-                        )
+                    if (rowColInput.Length == 2 &&
+                        int.TryParse(rowColInput[0], out rowCount) && rowCount > 0 &&
+                        int.TryParse(rowColInput[1], out colCount) && colCount > 0)
                     {
-                        tamVal = true;
+                        isValidSize = true;
                     }
                     else
                     {
-                        Console.WriteLine("por favor, digite um numero inteiro valido");
-                        tamVal = false;
+                        Console.WriteLine("Please enter valid positive integers for rows and columns.");
+                        isValidSize = false;
                     }
-                }while (tamVal==false);
-                matriz = new string[linMat,colMat];
-                Console.WriteLine($"Você criou uma matriz {linMat}x{colMat} com sucesso" +
-                    $"\nPressione qualquer tecla para continuar...");
+                } while (isValidSize == false);
+
+                matrix = new string[rowCount, colCount];
+                Console.WriteLine($"You successfully created a {rowCount}x{colCount} matrix." +
+                                  $"\nPress any key to continue...");
                 Console.ReadKey();
 
-                //nota própria, as funções return dentro dos métodos chamados em casa case, voltaram para dentro deste while, não irão pedir para re-criar o tamanho da matriz
-
-                while (true) 
+                while (true)
                 {
                     Console.Clear();
-                    Console.WriteLine("Escolha uma opção: ");
-                    Console.WriteLine("1 - adicionar item");
-                    Console.WriteLine("2 - remover item");
-                    Console.WriteLine("3 - Exibir Matriz");
-                    Console.WriteLine("4 - Consultar/Buscar Elemento");
-                    Console.WriteLine("0 - Voltar para o Menu Principal");
+                    Console.WriteLine("Choose an option: ");
+                    Console.WriteLine("1 - Add item");
+                    Console.WriteLine("2 - Remove item");
+                    Console.WriteLine("3 - Display Matrix");
+                    Console.WriteLine("4 - Query/Search Element");
+                    Console.WriteLine("0 - Return to Main Menu");
                     Console.WriteLine();
 
-                    char escolha;
-                    bool opcVal=false;
+                    char choice;
+                    bool isValidOption = false;
                     do
                     {
-                        escolha = Console.ReadKey().KeyChar;
+                        choice = Console.ReadKey().KeyChar;
+                        Console.WriteLine(); 
 
-                        if((escolha == '1') || (escolha == '2') || (escolha == '3')|| (escolha == '4') || (escolha == '0'))
+                        if ((choice == '1') || (choice == '2') || (choice == '3') || (choice == '4') || (choice == '0'))
                         {
-                            opcVal = true;
+                            isValidOption = true;
                         }
                         else
                         {
-                            Console.WriteLine("escolha uma opção valida");
+                            Console.WriteLine("Please choose a valid option.");
                         }
-                    } while (opcVal == false);
+                    } while (isValidOption == false);
 
-                    switch (escolha)
+                    switch (choice)
                     {
                         case '1':
                             AddItem();
                             break;
-                            
+
                         case '2':
-                            RemItem();
+                            RemoveItem();
                             break;
 
                         case '3':
-                            ExibirItem();
+                            DisplayItems();
                             break;
 
                         case '4':
-                            ProcItem();
+                            SearchItem();
                             break;
 
                         case '0':
-                            Console.WriteLine("pressione qualquer tecla para voltar ao menu principal...");
+                            Console.WriteLine("Press any key to return to the main menu...");
                             return;
                         default:
-                            Console.WriteLine("digite uma opção valida!");
+                            Console.WriteLine("Enter a valid option!");
                             break;
                     }
                 }
@@ -493,156 +506,164 @@ namespace Menu_interativo_entrutura_de_dados_VMFPL
             private static void AddItem()
             {
                 Console.Clear();
-                int j = 0,k = 0;
-
-                if (matriz != null || !MatVazia(matriz))
+                if (matrix != null && !IsMatrixEmpty(matrix))
                 {
-                    bool charvalido = false;
-                    Console.WriteLine("Já existe uma matriz criada, ao adicionar item novamente, voce\n" +
-                        "substituirá a matriz anterior, gostaria de prosseguir? :(1-sim / 2-não)");
+                    bool validChar = false;
+                    Console.WriteLine("A matrix already exists. Adding items again will\n" +
+                                      "replace the previous matrix content. Do you want to proceed? (1-yes / 2-no)");
                     do
                     {
-                        char addDnv = Console.ReadKey().KeyChar;
-                        Console.WriteLine();
-                        if (addDnv == '1')
+                        char addAgainChoice = Console.ReadKey().KeyChar;
+                        Console.WriteLine(); 
+
+                        if (addAgainChoice == '1')
                         {
-                            Console.WriteLine("Iniciando processo de substituição dos valores de sua matriz...");
-                            charvalido = true;
+                            Console.WriteLine("Starting the process of replacing your matrix values...");
+                            validChar = true;
                         }
-                        else if (addDnv == '2')
+                        else if (addAgainChoice == '2')
                         {
-                            Console.Write("Entendido, pressione qualquer tecla para voltar ao menu...");
+                            Console.Write("Understood. Press any key to return to the menu...");
                             Console.ReadKey();
                             return;
                         }
                         else
                         {
-                            Console.WriteLine("por favor, digite um valor válido (1-sim / 2-não)");
+                            Console.WriteLine("Please enter a valid value (1-yes / 2-no)");
                         }
-                    }while (charvalido==false);
+                    } while (validChar == false);
                 }
-                Console.WriteLine("você ja pode escrever os elementos de sua matriz!");
-                for (j=0;j<linMat;j++)
+
+                Console.WriteLine("You can now enter the elements for your matrix!");
+                for (int j = 0; j < rowCount; j++)
                 {
-                    for (k=0;k<colMat;k++)
+                    for (int k = 0; k < colCount; k++)
                     {
-                        matriz[j,k]=Console.ReadLine();
+                        Console.Write($"Enter value for [{j},{k}]: ");
+                        matrix[j, k] = Console.ReadLine();
                     }
                 }
+                Console.WriteLine("Matrix populated. Press any key to continue...");
+                Console.ReadKey();
                 return;
             }
-            private static void RemItem()
+
+            private static void RemoveItem()
             {
                 Console.Clear();
-                if (matriz == null || MatVazia(matriz))
+                if (matrix == null || IsMatrixEmpty(matrix))
                 {
-                    Console.WriteLine("Sua matriz está vazia ou não foi criada!");
+                    Console.WriteLine("Your matrix is empty or has not been created!");
                     Console.ReadKey();
                     return;
                 }
 
-                bool contRem = true;
+                bool continueRemoval = true;
                 do
                 {
-                    ExibirItem();
-                    Console.WriteLine("\nPara remover, digite a linha e a coluna do item que deseja remover (começando de 0 e separadas por espaço, ex: 0 1  irá eliminar o elemento da linha 0 coluna 1).");
-                    Console.WriteLine("Digite 'sair' para voltar ao menu da matriz.");
+                    DisplayItems();
+                    Console.WriteLine("\nTo remove, enter the row and column of the item you want to remove (starting from 0 and separated by space, e.g., 0 1 will remove the element at row 0 column 1).");
+                    Console.WriteLine("Type 'exit' to return to the matrix menu.");
 
                     string input = Console.ReadLine();
-                    if (input.ToLower() == "sair")
+                    if (input.ToLower() == "exit")
                     {
-                        contRem = false;
+                        continueRemoval = false;
                         continue;
                     }
 
                     string[] coords = input.Split(' ');
-                    int linRem, colRem;
+                    int rowToRemove, colToRemove;
 
                     if (coords.Length == 2 &&
-                        int.TryParse(coords[0], out linRem) &&
-                        int.TryParse(coords[1], out colRem) &&
-                        linRem >= 0 && linRem < linMat &&
-                        colRem >= 0 && colRem < colMat)
+                        int.TryParse(coords[0], out rowToRemove) &&
+                        int.TryParse(coords[1], out colToRemove) &&
+                        rowToRemove >= 0 && rowToRemove < rowCount &&
+                        colToRemove >= 0 && colToRemove < colCount)
                     {
-                        if (!string.IsNullOrEmpty(matriz[linRem, colRem]))
+                        if (!string.IsNullOrEmpty(matrix[rowToRemove, colToRemove]))
                         {
-                            Console.WriteLine($"Removendo '{matriz[linRem, colRem]}' da posição [{linRem},{colRem}]");
-                            matriz[linRem, colRem] = null; 
-                            Console.WriteLine("Item removido com sucesso!");
+                            Console.WriteLine($"Removing '{matrix[rowToRemove, colToRemove]}' from position [{rowToRemove},{colToRemove}]");
+                            matrix[rowToRemove, colToRemove] = null;
+                            Console.WriteLine("Item removed successfully!");
                         }
                         else
                         {
-                            Console.WriteLine("Esta posição já está vazia!");
+                            Console.WriteLine("This position is already empty!");
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Coordenadas inválidas, digite a linha e a coluna corretamente.");
+                        Console.WriteLine("Invalid coordinates. Please enter the row and column correctly.");
                     }
-                    Console.ReadKey(); 
-                } while (contRem);
+                    Console.ReadKey();
+                } while (continueRemoval);
             }
 
-            private static void ExibirItem()
+            private static void DisplayItems()
             {
                 Console.Clear();
-                if (matriz == null || MatVazia(matriz))
+                if (matrix == null || IsMatrixEmpty(matrix))
                 {
-                    Console.WriteLine("Sua matriz está vazia ou não foi criada!");
+                    Console.WriteLine("Your matrix is empty or has not been created!");
                     Console.ReadKey();
                     return;
                 }
 
-                Console.WriteLine("Elementos da Matriz:");
-                for (int j = 0; j < linMat; j++)
+                Console.WriteLine("Matrix Elements:");
+                for (int j = 0; j < rowCount; j++)
                 {
-                    for (int k = 0; k < colMat; k++)
+                    for (int k = 0; k < colCount; k++)
                     {
-                        Console.Write($"[{j},{k}]: {matriz[j, k] ?? "Vazio"}\t");//(tentando usar interrogação, objetivo: só mostrar vazio caso não haja elemento)
+                        Console.Write($"[{j},{k}]: {matrix[j, k] ?? "Empty"}\t");
                     }
-                    Console.WriteLine(); 
+                    Console.WriteLine();
                 }
+                Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey();
             }
 
-            private static void ProcItem()
+            private static void SearchItem()
             {
                 Console.Clear();
-                if (matriz == null || MatVazia(matriz))
+                if (matrix == null || IsMatrixEmpty(matrix))
                 {
-                    Console.WriteLine("Sua matriz está vazia ou não foi criada!");
+                    Console.WriteLine("Your matrix is empty or has not been created!");
                     Console.ReadKey();
                     return;
                 }
 
-                Console.Write("Digite o item que você quer buscar na matriz: ");
-                string itemBuscar = Console.ReadLine();
-                bool encontrado = false;
+                Console.Write("Enter the item you want to search for in the matrix: ");
+                string itemToSearch = Console.ReadLine();
+                bool found = false;
 
-                Console.WriteLine($"\nBuscando '{itemBuscar}' na matriz...");
-                for (int j = 0; j < linMat; j++)
+                Console.WriteLine($"\nSearching for '{itemToSearch}' in the matrix...");
+                for (int j = 0; j < rowCount; j++)
                 {
-                    for (int k = 0; k < colMat; k++)
+                    for (int k = 0; k < colCount; k++)
                     {
-                        if (matriz[j, k] != null && matriz[j, k].Equals(itemBuscar, StringComparison.OrdinalIgnoreCase))
+                        if (matrix[j, k] != null && matrix[j, k].Equals(itemToSearch, StringComparison.OrdinalIgnoreCase))
                         {
-                            Console.WriteLine($"O item '{itemBuscar}' foi encontrado na posição [{j},{k}].");
-                            encontrado = true;
+                            Console.WriteLine($"The item '{itemToSearch}' was found at position [{j},{k}].");
+                            found = true;
                         }
                     }
                 }
-                if (encontrado==false)
+                if (found == false)
                 {
-                    Console.WriteLine($"O item '{itemBuscar}' não foi encontrado na matriz.");
+                    Console.WriteLine($"The item '{itemToSearch}' was not found in the matrix.");
                 }
                 Console.ReadKey();
             }
-            private static bool MatVazia(string[,] mat)
+            private static bool IsMatrixEmpty(string[,] mat)
             {
-                if (mat.Length==0)
+                if (mat == null) return true; 
+
+                if (mat.Length == 0) 
                 {
                     return true;
                 }
+
                 foreach (var item in mat)
                 {
                     if (!string.IsNullOrEmpty(item))
@@ -650,7 +671,7 @@ namespace Menu_interativo_entrutura_de_dados_VMFPL
                         return false;
                     }
                 }
-                return true;
+                return true; 
             }
         }
     }
