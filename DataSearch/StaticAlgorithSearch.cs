@@ -1,124 +1,169 @@
 using System;
 
-namespace Search_algorithm_static
+namespace StaticList
 {
-
-    public class staticList<T> where T : IComparable<T>
+    public class List
     {
-        private T[] elements;
-        private int size, capacity;
-        public staticList(int capacity)
+        private char[] elements;
+        private int size;
+        private int capacity;
+        public List(int capacity)
         {
             this.capacity = capacity;
-            elements = new T[capacity];
+            this.elements = new char[capacity];
             size = 0;
         }
-        //insert
-        public void insert(T Value)
+        public void Insert(char value)
         {
             if (size == capacity)
             {
-                Console.WriteLine("lista cheia.");
+                Console.WriteLine("List full!");
                 return;
             }
-            elements[size] = Value;
+            elements[size] = value;
             size++;
         }
-        //display
-        public void display()
+
+        public void InsertAtPosition(int pos, char value)
+        {
+            if (size == capacity)
+            {
+                Console.WriteLine("List full!");
+                return;
+            }
+            if (pos < 0 || pos > size)
+            {
+                Console.WriteLine("Invalid position!");
+                return;
+            }
+
+            for (int i = size; i > pos; i--)
+            {
+                elements[i] = elements[i - 1];
+            }
+
+            elements[pos] = value;
+            size++;
+        }
+        public void Remove(int pos)
+        {
+            if (pos < 0 || pos >= size)
+            {
+                Console.WriteLine("Invalid position!");
+                return;
+            }
+
+            for (int i = pos; i < size - 1; i++)
+            {
+                elements[i] = elements[i + 1];
+            }
+            size--;
+        }
+        public void Display()
         {
             if (size == 0)
             {
-                Console.WriteLine("Lista Vazia.");
+                Console.WriteLine("List empty");
                 return;
             }
-            Console.WriteLine("Lista: ");
+            Console.Write("List: ");
             for (int i = 0; i < size; i++)
             {
                 Console.Write(elements[i] + " ");
             }
             Console.WriteLine();
         }
-        //sequential search algorithm
-        public int sequencialSearch(T Value)
+        public int Size()
         {
-            for (int i = 0; i < size; i++)
-            {
-                if (elements[i].CompareTo(Value) == 0)
-                {
-                    return i;
-                }
-            }
-            return -1;
+            return size;
         }
-        //binary search algorithm
-        public int binarySearch(T Value)
+        public bool IsEmpty()
         {
-            int start = 0;
-            int end = size - 1;
-            while (start <= end)
-            {
-                int middle = (start + end) / 2;
-                if (elements[middle].CompareTo(Value) == 0)
-                {
-                    return middle;
-                }
-                // metade de um valor quebrado para menor
-                if (elements[middle].CompareTo(Value) > 0)
-                {
-                    start = middle - 1;
-                }
-                //metade de um valor quebrado para maior
-                else
-                {
-                    start = middle + 1;
-                }
-            }
-            return -1;
+            return size == 0;
         }
-    }
-    public class Program
-    {
-        static void Main(string[] args)
+        public char ElementAtPosition(int pos)
         {
-            Console.WriteLine("digite a quantidade de elementos da lista: ");
-            int n = int.Parse(Console.ReadLine());
-            staticList<int> list = new staticList<int>(n);
-            for (int i = 0; i < n; i++)
+            if (pos < 0 || pos >= size) // Added boundary check
             {
-                Console.WriteLine($"Digite o {i + 1} elemento.");//ou digite o primeiro elemento
-                int value = int.Parse(Console.ReadLine());
-                list.insert(value);
+                Console.WriteLine("Invalid position!");
+                return '\0'; // Return null char for invalid position
             }
-            list.display();
+            return elements[pos]; // Return the element at the specified position
+        }
+        internal class Program
+        {
+            static void Main(string[] args)
+            {
+                List list = new List(10);
+                int option;
+                char value;
+                int pos;
 
-            Console.WriteLine("digite o valor a ser procurado.");
-            int elementSearch = int.Parse(Console.ReadLine());
-            //sequencial search
-            int sequencialResult = list.sequencialSearch(elementSearch);
-            if (sequencialResult != -1)
-            {
-                Console.WriteLine($"o elemento é o: {elementSearch} " +
-                    $"encontrado na posição {sequencialResult} " +
-                    $" - (Busca sequencial)");
-            }
-            else
-            {
-                Console.WriteLine($"Elementos {elementSearch} + " +
-                    $"não encontrado - (Busca Sequencial)");
-            }
-            //busca binária (lista precisa estar ordenada para funcionar)
-            int binaryResult = list.binarySearch(elementSearch);
-            if (sequencialResult != -1)
-            {
-                Console.WriteLine($"o elemento é o: {elementSearch} " +
-                    $"encontrado na posição {sequencialResult} " +
-                    $" - (Busca sequencial)");
-            }
-            else
-            {
-                Console.WriteLine($"Elementos {elementSearch} + " +
-                    $"não encontrado - (Busca binária)");
+                do
+                {
+                    Console.WriteLine("\nSTATIC LINEAR LIST");
+                    Console.WriteLine("0. Exit");
+                    Console.WriteLine("1. Insert at end");
+                    Console.WriteLine("2. Insert at specific position");
+                    Console.WriteLine("3. Remove by position");
+                    Console.WriteLine("4. List Size");
+                    Console.WriteLine("5. Display list");
+                    Console.WriteLine("6. Display element at position");
+                    Console.Write("Choose an option: ");
+                    option = int.Parse(Console.ReadLine());
+
+                    switch (option)
+                    {
+                        case 0:
+                            Console.WriteLine("Exiting...");
+                            break;
+
+                        case 1:
+                            Console.Write("Enter the value: ");
+                            value = Console.ReadKey().KeyChar;
+                            Console.WriteLine();
+                            list.Insert(value);
+                            break;
+
+                        case 2:
+                            Console.Write("Enter the position: ");
+                            pos = int.Parse(Console.ReadLine());
+                            Console.Write("Enter the value: ");
+                            value = Console.ReadKey().KeyChar;
+                            Console.WriteLine();
+                            list.InsertAtPosition(pos, value);
+                            break;
+
+                        case 3:
+                            Console.Write("Enter the position to remove: ");
+                            pos = int.Parse(Console.ReadLine());
+                            list.Remove(pos);
+                            break;
+
+                        case 4:
+                            Console.WriteLine("Current size: " + list.Size());
+                            break;
+
+                        case 5:
+                            list.Display();
+                            break;
+
+                        case 6:
+                            Console.Write("Enter the position: ");
+                            pos = int.Parse(Console.ReadLine());
+                            value = list.ElementAtPosition(pos);
+                            if (value != '\0') // Check if a valid character was returned
+                            {
+                                Console.WriteLine("Element: " + value);
+                            }
+                            break;
+
+                        default:
+                            Console.WriteLine("Invalid option!");
+                            break;
+                    }
+
+                } while (option != 0);
             }
         }
     }
