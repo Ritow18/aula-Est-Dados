@@ -1,58 +1,65 @@
 using System;
 using System.Collections.Generic;
 
-namespace dataSearchHashTable
+namespace DataSearchHashTable
 {
     public class HashTable<T>
     {
-        private List<LinkedList<T>> tableList;
+        private List<LinkedList<T>> buckets;
         private int capacity;
-        public HashTable( int capacity = 10)
+
+        public HashTable(int capacity = 10)
         {
             this.capacity = capacity;
-            tableList = new List<LinkedList<T>>(capacity);
+            buckets = new List<LinkedList<T>>(capacity);
             for (int i = 0; i < capacity; i++)
             {
-                tableList.Add(new LinkedList<T>());
+                buckets.Add(new LinkedList<T>());
             }
         }
+
         private int Hash(T value)
         {
             return Math.Abs(value.GetHashCode()) % capacity;
         }
-        public void insert(T value) 
+
+        public void Insert(T value)
         {
-            int indice = Hash(value);
-            if (!tableList[indice].Contains(value))
+            int index = Hash(value);
+            if (!buckets[index].Contains(value))
             {
-                tableList[indice].AddLast(value);
-                Console.WriteLine($"{value} inserido na posição: {indice}");
+                buckets[index].AddLast(value);
+                Console.WriteLine($"{value} inserted at position: {index}");
             }
             else
             {
-                Console.WriteLine($"{value} é um valor que já existe na posição: {indice}");
+                Console.WriteLine($"{value} already exists at position: {index}");
             }
         }
-        public bool Search(T value) 
+
+        public bool Search(T value)
         {
-            int indice = Hash(value);
-            return tableList[indice].Contains(value);
+            int index = Hash(value);
+            return buckets[index].Contains(value);
         }
+
         public bool Remove(T value)
         {
-            int indice = Hash(value);
-            return tableList[indice].Remove(value);
+            int index = Hash(value);
+            return buckets[index].Remove(value);
         }
+
         public void Display()
         {
             for (int i = 0; i < capacity; i++)
             {
                 Console.Write($"[{i}]: ");
-                foreach (var item in tableList[i])
+                foreach (var item in buckets[i])
                 {
                     Console.Write(item + " -> ");
                 }
                 Console.Write("null");
+                Console.WriteLine();
             }
         }
     }
