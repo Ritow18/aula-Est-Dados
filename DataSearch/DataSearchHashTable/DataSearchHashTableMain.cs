@@ -1,87 +1,87 @@
 using System;
 
-namespace dataSearchHashTable
+namespace DataSearchHashTable
 {
-
     public class Program
     {
         static void Main(string[] args)
         {
-            HashTable<int> tableList = new HashTable<int>();
+            HashTable<int> hashTable = new HashTable<int>();
+
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Tabela hash");
-                Console.WriteLine("1: inserir valor");
-                Console.WriteLine("2: Buscar valor");
-                Console.WriteLine("3: Remover valor");
-                Console.WriteLine("4: Exibir tabela");
-                Console.WriteLine("0: sair");
-                Console.Write("insira uma das opções: ");
+                Console.WriteLine("Hash Table");
+                Console.WriteLine("1: Insert Value");
+                Console.WriteLine("2: Search Value");
+                Console.WriteLine("3: Remove Value");
+                Console.WriteLine("4: Display Table");
+                Console.WriteLine("0: Exit");
+                Console.Write("Enter one of the options above: ");
 
-                char opcao = Console.ReadKey().KeyChar;
+                char option = Console.ReadKey().KeyChar;
+                Console.WriteLine();
                 Console.Clear();
 
-                switch (opcao)
+                switch (option)
                 {
                     case '1':
-                        Console.Write("valor a inserir: ");
-                        if (int.TryParse(Console.ReadLine(),out int valueInsert))
+                        Console.Write("Value to insert: ");
+                        if (int.TryParse(Console.ReadLine(), out int valueToInsert))
                         {
-                            tableList.insert(valueInsert);
+                            hashTable.Insert(valueToInsert);
                         }
                         else
                         {
-                            Console.WriteLine("valor inválido!");
+                            Console.WriteLine("Invalid value!");
                         }
-                            break;
+                        break;
                     case '2':
-                        Console.Write("valor a inserir: ");
-                        if (int.TryParse(Console.ReadLine(), out int valueSearch))
+                        Console.Write("Value to search: ");
+                        if (int.TryParse(Console.ReadLine(), out int valueToSearch))
                         {
-                            if (tableList.Search(valueSearch))
+                            if (hashTable.Search(valueToSearch))
                             {
-                                Console.WriteLine($"{valueSearch} Encontrado");
+                                Console.WriteLine($"{valueToSearch} Found");
                             }
                             else
                             {
-                                Console.WriteLine($"{valueSearch} não está na tabela");
+                                Console.WriteLine($"{valueToSearch} not in table");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("valor inválido!");
+                            Console.WriteLine("Invalid value!");
                         }
                         break;
                     case '3':
-                        Console.Write("valor a remover: ");
-                        if (int.TryParse(Console.ReadLine(), out int valueRemove))
+                        Console.Write("Value to remove: ");
+                        if (int.TryParse(Console.ReadLine(), out int valueToRemove))
                         {
-                            if (tableList.Remove(valueRemove))
+                            if (hashTable.Remove(valueToRemove))
                             {
-                                Console.WriteLine($"{valueRemove} removido");
+                                Console.WriteLine($"{valueToRemove} removed");
                             }
                             else
                             {
-                                Console.WriteLine($"{valueRemove} não encontrado");
+                                Console.WriteLine($"{valueToRemove} not found");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("valor inválido!");
+                            Console.WriteLine("Invalid value!");
                         }
                         break;
                     case '4':
-                        Console.WriteLine();
+                        hashTable.Display();
                         break;
                     case '0':
                         return;
                     default:
-                        Console.WriteLine("Opção inválida!");
+                        Console.WriteLine("Invalid option!");
                         break;
                 }
-                Console.WriteLine("\nPressione Enter para continuar....");
-
+                Console.WriteLine("\nPress Enter to continue....");
                 Console.ReadKey();
             }
         }
