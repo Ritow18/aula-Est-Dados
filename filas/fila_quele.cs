@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace Fila_Queue
+namespace Queue_Implementation
 {
     internal class Program
     {
@@ -9,54 +9,54 @@ namespace Fila_Queue
         {
             Queue<char> queue = new Queue<char>();
 
-            int opcao;
-            char valor;
-            Console.WriteLine("Fila usando Queue");
+            int option;
+            char value;
+            Console.WriteLine("Queue using Queue");
 
             do
             {
-                Console.WriteLine("Escolha uma o~pção");
-                Console.WriteLine("0. Sair");
+                Console.WriteLine("Choose an option:");
+                Console.WriteLine("0. Exit");
                 Console.WriteLine("1. Enqueue");
-                Console.WriteLine("2. Head");
-                Console.WriteLine("3. Desenfileirar");
-                Console.WriteLine("4. Tamanho da fila");
-                Console.WriteLine("5. Exibir fila");
-                opcao = int.Parse(Console.ReadLine());
+                Console.WriteLine("2. Peek");
+                Console.WriteLine("3. Dequeue");
+                Console.WriteLine("4. Queue Size");
+                Console.WriteLine("5. Display Queue");
+                option = int.Parse(Console.ReadLine());
 
-                switch (opcao)
+                switch (option)
                 {
                     case 0:
-                        Console.WriteLine("Saindo...");
+                        Console.WriteLine("Exiting...");
                         break;
 
                     case 1:
-                        Console.WriteLine("Digite um valor a ser enfileirado: ");
-                        valor = Console.ReadKey().KeyChar;
-                        queue.Enqueue(valor);
+                        Console.WriteLine("Enter a value to enqueue: ");
+                        value = Console.ReadKey().KeyChar;
+                        queue.Enqueue(value);
                         Console.WriteLine();
                         break;
 
                     case 2:
                         if (queue.Count > 0)
-                            Console.WriteLine("Inicio da fila: " + queue.Peek());
+                            Console.WriteLine("Front of the queue: " + queue.Peek());
                         else
-                            Console.WriteLine("Fila Vazia");
+                            Console.WriteLine("Queue is Empty");
                         break;
 
                     case 3:
                         if (queue.Count > 0)
-                            Console.WriteLine("Elementos desenfileirados: " + queue.Dequeue());
+                            Console.WriteLine("Dequeued element: " + queue.Dequeue());
                         else
-                            Console.WriteLine("Fila Vazia");
+                            Console.WriteLine("Queue is Empty");
                         break;
 
                     case 4:
-                        Console.WriteLine("Quantidade de elementos na fila: " + queue.Count);
+                        Console.WriteLine("Number of elements in the queue: " + queue.Count);
                         break;
 
                     case 5:
-                        Console.WriteLine("Fila: ");
+                        Console.WriteLine("Queue: ");
                         foreach (var item in queue)
                         {
                             Console.WriteLine(item + " ");
@@ -64,11 +64,11 @@ namespace Fila_Queue
                         Console.WriteLine();
                         break;
                     default:
-                        Console.WriteLine("Opção invalida!");
+                        Console.WriteLine("Invalid option!");
                         break;
 
                 }
-            } while (opcao != 0);
+            } while (option != 0);
         }
     }
 }
